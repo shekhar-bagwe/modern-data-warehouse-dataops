@@ -41,6 +41,9 @@ for env_name in dev stg prod; do  # dev stg prod
     AZURE_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID \
     AZURESQL_SERVER_PASSWORD=$AZURESQL_SERVER_PASSWORD \
     bash -c "./scripts/deploy_infrastructure.sh"  # inclues AzDevOps Azure Service Connections and Variable Groups
+
+    #added prompt to allow manually terminating databricks cluser of completed environment
+    read -p "Deployment for $env_name completed, press enter to continue to next environment" y_n
 done
 
 

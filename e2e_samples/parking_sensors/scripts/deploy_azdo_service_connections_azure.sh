@@ -62,12 +62,14 @@ az_sp_tenant_id=$(echo "$az_sp" | jq -r '.tenant')
 azure_devops_ext_azure_rm_service_principal_key=$(echo "$az_sp" | jq -r '.password')
 export AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY=$azure_devops_ext_azure_rm_service_principal_key
 
-if sc_id=$(az devops service-endpoint list -o tsv | grep "$az_service_connection_name" | awk '{print $3}'); then
+#Added detect false to force Azure devops to use defauls org and project
+if sc_id=$(az devops service-endpoint list --detect false -o tsv | grep "$az_service_connection_name" | awk '{print $3}'); then
     echo "Service connection: $az_service_connection_name already exists. Deleting..."
-    az devops service-endpoint delete --id "$sc_id" -y
+    az devops service-endpoint delete --detect false --id "$sc_id" -y
 fi
 echo "Creating Azure service connection Azure DevOps"
 sc_id=$(az devops service-endpoint azurerm create \
+    --detect false \
     --name "$az_service_connection_name" \
     --azure-rm-service-principal-id "$service_principal_id" \
     --azure-rm-subscription-id "$az_sub_id" \
@@ -75,5 +77,6 @@ sc_id=$(az devops service-endpoint azurerm create \
     --azure-rm-tenant-id "$az_sp_tenant_id" --output json | jq -r '.id')
 
 az devops service-endpoint update \
+    --detect false \
     --id "$sc_id" \
     --enable-for-all "true"

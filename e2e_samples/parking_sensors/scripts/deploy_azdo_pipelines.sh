@@ -41,7 +41,7 @@ set -o xtrace # For debugging
 
 # Retrieve Github Service Connection Id
 github_sc_name="${PROJECT}-github"
-github_sc_id=$(az devops service-endpoint list --output json |
+github_sc_id=$(az devops service-endpoint list --detect false --output json |
     jq -r --arg NAME "$github_sc_name" '.[] | select(.name==$NAME) | .id')
 
 createPipeline () {
@@ -49,6 +49,7 @@ createPipeline () {
     declare pipeline_description=$2
     full_pipeline_name=$PROJECT-$pipeline_name
     pipeline_id=$(az pipelines create \
+        --detect false \
         --name "$full_pipeline_name" \
         --description "$pipeline_description" \
         --repository "$GITHUB_REPO_URL" \
@@ -69,6 +70,7 @@ createPipeline "ci-artifacts" "This pipeline publishes build artifacts"
 cd_release_pipeline_id=$(createPipeline "cd-release" "This pipeline releases across environments")
 
 az pipelines variable create \
+    --detect false \
     --name devAdfName \
     --pipeline-id "$cd_release_pipeline_id" \
     --value "$DEV_DATAFACTORY_NAME"
