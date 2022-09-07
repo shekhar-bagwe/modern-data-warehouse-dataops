@@ -36,7 +36,7 @@ stages:
         versionSpec: '3.6'
         architecture: 'x64'
 
-    - script: pip install -r $(pythonWorkingDir)\requirements_dev.txt && pip install -r $(pythonWorkingDir)\requirements.txt
+    - script: pip install -r requirements_dev.txt && pip install -r requirements.txt
       workingDirectory: $(pythonWorkingDir)
       displayName: 'Install requirements'
 
