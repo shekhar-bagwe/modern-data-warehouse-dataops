@@ -1,0 +1,9 @@
+{
+	"name": "mdwdops-adf-dev-sbx",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b7fc75e5-8d0a-455c-a282-dbaadd0f05f7",
+		"tenantId": "273f5530-6afd-4e02-8e0a-2c48fe9ed129"
+	}
+}
