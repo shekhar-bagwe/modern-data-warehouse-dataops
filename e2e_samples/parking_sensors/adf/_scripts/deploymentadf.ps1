@@ -8,6 +8,9 @@ param
     [parameter(Mandatory = $false)] [Bool] $deleteDeployment=$false
 )
 
+#Adding login
+Connect-AzAccount -TenantId "273f5530-6afd-4e02-8e0a-2c48fe9ed129"
+
 $templateJson = Get-Content $armTemplate | ConvertFrom-Json
 $resources = $templateJson.resources
 
