@@ -6,7 +6,8 @@ jobs:
 - deployment: deploy_databricks
   displayName: 'Deploy to Databricks'
   pool:
-    vmImage: 'ubuntu-latest'
+    name: ubuntu_agent
+    #vmImage: 'ubuntu-latest'
   variables:
     pythonVersion: 3.6
   environment: ${{ parameters.environmentName }}
