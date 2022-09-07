@@ -28,7 +28,7 @@ stages:
   - job: 'publish_python_packages'
     displayName: 'Publish Python Packages'
     pool: 
-      name: Default
+      name: ubuntu_agent
       #vmImage: 'ubuntu-latest'
     steps:
     - task: UsePythonVersion@0
