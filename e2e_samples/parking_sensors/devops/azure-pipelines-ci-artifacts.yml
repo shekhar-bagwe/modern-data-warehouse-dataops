@@ -27,8 +27,9 @@ stages:
   jobs:
   - job: 'publish_python_packages'
     displayName: 'Publish Python Packages'
-    pool:
-      vmImage: 'ubuntu-latest'
+    pool: 
+      name: Default
+      #vmImage: 'ubuntu-latest'
     steps:
     - task: UsePythonVersion@0
       inputs:
@@ -54,7 +55,8 @@ stages:
   - job: 'publish_static_artifacts'
     displayName: 'Publish Static Artifacts'
     pool:
-      vmImage: 'ubuntu-latest'
+      name: Default
+      #vmImage: 'ubuntu-latest'
     steps:
     - task: PublishBuildArtifacts@1
       inputs:
@@ -71,7 +73,8 @@ stages:
   - job: 'publish_sql_packages'
     displayName: 'Publish SQL Packages'
     pool:
-      vmImage: 'windows-latest'
+      name: Default
+      #vmImage: 'windows-latest'
     steps:
     - task: NuGetToolInstaller@1
 
