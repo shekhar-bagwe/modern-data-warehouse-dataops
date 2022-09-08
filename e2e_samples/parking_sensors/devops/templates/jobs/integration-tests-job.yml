@@ -3,8 +3,8 @@ jobs:
   displayName: 'Run integration tests'
   dependsOn: deploy_adf
   pool:
-    name: ubuntu_agent
-    #vmImage: 'ubuntu-latest'
+    #name: ubuntu_agent
+    vmImage: 'ubuntu-latest'
   variables:
     pythonWorkingDir: 'e2e_samples/parking_sensors/tests/integrationtests'
     pythonVersion: 3.6
